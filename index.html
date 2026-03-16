@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SYSTEM IOS</title>
+  <title>JSFiddle tfjhsnLw</title>
 
   <style>
     /* CONTACT */
@@ -520,7 +520,7 @@ LOGIN
 
 /* ================= CONFIG ================= */
 
-const SERVER_URL="https://testapi-production-11a6.up.railway.app/";
+const SERVER_URL="https://apikey-production-8bb0.up.railway.app/";
 
 /* ================= DEVICE ID ================= */
 
@@ -566,17 +566,23 @@ async function checkKey(key, auto = false) {
             status.innerText = "✅ Login success";
             localStorage.setItem("SYSTEMIOS_KEY", key);
 
-  
             /* LOAD MENU */
             setTimeout(() => {
-                showMenu();
-startKeyTimer(data.expireAt, data.serverTime);
+                showMenu(data.daysLeft);
                 startGalaxy();
             }, 700);
         } else {
             status.innerText = "❌ " + (data.message || "Key không hợp lệ");
             localStorage.removeItem("SYSTEMIOS_KEY");
         }
+
+    } catch (e) {
+        console.error("Lỗi kết nối server:", e);
+        loader.style.display = "none";
+        btn.disabled = false;
+        status.innerText = "❌ Không thể kết nối đến Server";
+    }
+}
 
 /* ================= LOGIN CLICK ================= */
 
@@ -785,7 +791,7 @@ src="https://sf-static.upanhlaylink.com/img/image_20260315bfb9fa385a7398288bdc9b
 </div>
 
 <div class="toast">
-Đăng nhập thành công!
+Đăng nhập thành công! Còn ${days} ngày
 </div>
 <div class="contact">
 
