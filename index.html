@@ -566,23 +566,17 @@ async function checkKey(key, auto = false) {
             status.innerText = "✅ Login success";
             localStorage.setItem("SYSTEMIOS_KEY", key);
 
+  
             /* LOAD MENU */
             setTimeout(() => {
-                showMenu(data.daysLeft);
+                showMenu();
+startKeyTimer(data.expireAt, data.serverTime);
                 startGalaxy();
             }, 700);
         } else {
             status.innerText = "❌ " + (data.message || "Key không hợp lệ");
             localStorage.removeItem("SYSTEMIOS_KEY");
         }
-
-    } catch (e) {
-        console.error("Lỗi kết nối server:", e);
-        loader.style.display = "none";
-        btn.disabled = false;
-        status.innerText = "❌ Không thể kết nối đến Server";
-    }
-}
 
 /* ================= LOGIN CLICK ================= */
 
